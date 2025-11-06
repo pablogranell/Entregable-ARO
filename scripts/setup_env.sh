@@ -9,10 +9,10 @@ SRC_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 source /opt/ros/humble/setup.bash
 
 # Source workspace
-if [ -f "$WORKSPACE_DIR/install/setup.bash" ]; then
-    source "$WORKSPACE_DIR/install/setup.bash"
+if [ -f "$WORKSPACE_DIR/turtlebot3_ws/install/setup.bash" ]; then
+    source "$WORKSPACE_DIR/turtlebot3_ws/install/setup.bash"
 else
-    echo "Advertencia: No se encontró $WORKSPACE_DIR/install/setup.bash"
+    echo "Advertencia: No se encontró $WORKSPACE_DIR/turtlebot3_ws/install/setup.bash"
     echo "Ejecuta 'colcon build' en el workspace primero"
 fi
 
