@@ -1,0 +1,131 @@
+<!-- Inicio de la definición del archivo SDF con versión 1.4 -->
+<sdf version='1.4'>
+
+  <!-- Definición del mundo llamado 'default' -->
+  <world name='default'>
+
+    <!-- Configuración de una luz tipo direccional llamada 'sun' -->
+    <light name='sun' type='directional'>
+      <!-- Habilita que esta luz genere sombras -->
+      <cast_shadows>1</cast_shadows>
+      <!-- Posición y orientación de la luz -->
+      <pose>0 0 10 0 -0 0</pose>
+      <!-- Color difuso de la luz -->
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <!-- Color especular de la luz -->
+      <specular>0.2 0.2 0.2 1</specular>
+      <!-- Atenuación de la luz basada en la distancia -->
+      <attenuation>
+        <!-- Rango de la atenuación -->
+        <range>1000</range>
+        <!-- Factores de atenuación constantes, lineales y cuadráticos -->
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <!-- Dirección de la luz direccional -->
+      <direction>0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Definición del modelo del plano del suelo -->
+    <model name='ground_plane'>
+      <!-- El modelo es estático, lo que significa que no se moverá -->
+      <static>1</static>
+      <!-- Definición del enlace principal del plano del suelo -->
+      <link name='link'>
+        <!-- Configuración de la colisión para el plano -->
+        <collision name='collision'>
+          <geometry>
+            <!-- Geometría del plano -->
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <!-- Propiedades de fricción del plano -->
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+            </friction>
+            <bounce/>
+            <!-- Configuración de contacto del plano -->
+            <contact>
+              <ode/>
+            </contact>
+          </surface>
+          <!-- Máximo número de contactos permitidos para este plano -->
+          <max_contacts>10</max_contacts>
+        </collision>
+        <!-- Configuración visual del plano -->
+        <visual name='visual'>
+          <!-- Desactiva la generación de sombras para esta visualización -->
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <!-- Material del plano -->
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <!-- Decaimiento de velocidad del enlace -->
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <!-- Auto-colisión desactivada -->
+        <self_collide>0</self_collide>
+        <!-- Propiedades cinemáticas y gravitacionales -->
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+
+    <!-- Configuración del escenario del mundo -->
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>0</shadows>
+    </scene>
+
+    <!-- Configuración de la física del mundo usando el motor ODE -->
+    <physics type='ode'>
+      <max_step_size>0.01</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>0</real_time_update_rate>
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+
+    <!-- Estado actual del mundo -->
+    <state world_name='default'>
+      <sim_time>0 0</sim_time>
+      <real_time>0 44986</real_time>
+      <wall_time>1377677575 940727583</wall_time>
+    </state>
+
+    <!-- Configuración de la interfaz gráfica del usuario -->
+    <gui fullscreen='0'>
+      <!-- Cámara del usuario -->
+      <camera name='user_camera'>
+        <pose>2.6 -1.69 12.2 0 1.56 3.14</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+    </gui>
+
+    <!-- Inclusión de un modelo externo, en este caso, un pequeño almacén -->
+    <include>
+      <uri>model://small_warehouse</uri>
+      <pose>2.4 -2.1 0 0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>
