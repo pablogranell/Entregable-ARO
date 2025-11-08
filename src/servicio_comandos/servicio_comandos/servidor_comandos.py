@@ -52,11 +52,14 @@ class ServidorComandos(Node):
         
         # Puntos de patrullaje para recorrer toda la casa
         puntos_patrullaje = [
-            self.crear_pose(0.5, 0.0, 0.0),      # Punto cercano 1
-            self.crear_pose(0.5, 0.5, 1.57),     # Punto cercano 2
-            self.crear_pose(0.0, 0.5, 3.14),     # Punto cercano 3
-            self.crear_pose(-0.5, 0.0, -1.57),   # Punto cercano 4
-            self.crear_pose(0.0, 0.0, 0.0),
+            self.crear_pose(2.0, -2.0, 0.0),    # salida
+            self.crear_pose(-6.0, -3.0, 0.0),   # habitacion abajo
+            self.crear_pose(-6.0, 4.0, 0.0),    # habitacion abajo izquierda
+            self.crear_pose(-1.0, 4.0, 0.0),    # habitacion grande
+            self.crear_pose(7.0, 4.0, 0.0),     # habitacion arriba
+            self.crear_pose(1.0, 2.0, 0.0),     # habitacion en medio
+            self.crear_pose(7.0, 4.0, 0.0),     # habitacion arriba
+            self.crear_pose(6.0, -2.0, 0.0)     # habitacion mesa
         ]
         
         # Navegar a través de cada punto
@@ -82,7 +85,7 @@ class ServidorComandos(Node):
         self.get_logger().info('Navegando a la salida...')
         
         # Coordenadas de la salida (ajustar según el mapa)
-        salida = self.crear_pose(0.0, 2.0, 0.0)
+        salida = self.crear_pose(2.0, -2.0, 0.0)
         
         self.navigator.goToPose(salida)
         

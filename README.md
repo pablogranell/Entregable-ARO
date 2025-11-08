@@ -32,6 +32,23 @@ Cierra SLAM y Teleop (Ctrl+C), mantén Gazebo corriendo:
 bash scripts/paso5_nav2.sh
 ```
 
+## TAREA 1: Navegación Autónoma y Servicio de Comandos
+
+### Ejecutar todo (5 terminales)
+```bash
+bash scripts/ejecutar_todo.sh
+```
+
+NOTA: Pulsar ENTER en cada terminal para continuar el proceso una vez nos aseguramos de que el servidor de gazebo esta funcionando correctamente.
+
+Luego ejecutar en otra terminal:
+```bash
+ros2 run servicio_comandos cliente_comandos Patrullar
+ros2 run servicio_comandos cliente_comandos GoToExit
+```
+
+El robot empezara a navegar en base a los comandos recibidos.
+
 ## Instalación
 ```bash
 cd ~/turtlebot3_ws/src/
@@ -46,5 +63,5 @@ sudo dpkg --install ros-humble-tesoro-pkg_0.0.0-0jammy_amd64.deb
 ```bash
 cd ~/turtlebot3_ws
 colcon build --symlink-install
-source install/setup.bash
+source src/install/setup.bash
 ```
