@@ -4,4 +4,4 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/setup_env.sh"
 
-ros2 launch slam_toolbox online_async_launch.py use_sim_time:=True
+ros2 launch nav2_bringup navigation_launch.py use_sim_time:=True

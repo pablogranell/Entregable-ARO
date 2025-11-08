@@ -17,7 +17,7 @@ else
 fi
 
 # Configurar modelo TurtleBot3
-export TURTLEBOT3_MODEL=burger
+export TURTLEBOT3_MODEL=waffle
 
 # Configurar Gazebo
 GAZEBO_MODELS="$SRC_DIR/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models"
