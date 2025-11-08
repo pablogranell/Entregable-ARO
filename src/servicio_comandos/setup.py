@@ -1,10 +1,10 @@
 from setuptools import find_packages, setup
 
-package_name = 'servicios_comando'
+package_name = 'servicio_comandos'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='0.0.1',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -13,17 +13,15 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='pablo',
-    maintainer_email='pablo@todo.todo',
-    description='TODO: Package description',
-    license='TODO: License declaration',
-    extras_require={
-        'test': [
-            'pytest',
-        ],
-    },
+    maintainer='user',
+    maintainer_email='user@todo.todo',
+    description='Servidor y cliente de comandos de navegación para Turtlebot3',
+    license='Apache License 2.0',
+    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'servidor_comandos = servicio_comandos.servidor_comandos:main',
+            'cliente_comandos = servicio_comandos.cliente_comandos:main',
         ],
     },
 )

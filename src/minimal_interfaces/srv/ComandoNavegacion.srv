@@ -1,0 +1,6 @@
+# Solicitud del servicio
+string comando  # "Patrullar" o "GoToExit"
+---
+# Respuesta del servicio
+bool exito
+string mensaje
