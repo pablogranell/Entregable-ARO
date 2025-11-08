@@ -18,7 +18,6 @@ class ServidorComandos(Node):
         self.get_logger().info('Servidor de comandos iniciado')
 
     def crear_pose(self, x, y, theta):
-        """Crea un PoseStamped con las coordenadas dadas"""
         pose = PoseStamped()
         pose.header.frame_id = 'map'
         pose.header.stamp = self.navigator.get_clock().now().to_msg()
@@ -33,7 +32,6 @@ class ServidorComandos(Node):
         return pose
 
     def comando_callback(self, request, response):
-        """Callback para manejar los comandos recibidos"""
         self.get_logger().info(f'Comando recibido: {request.comando}')
         
         if request.comando == "Patrullar":
@@ -42,15 +40,14 @@ class ServidorComandos(Node):
             response.exito, response.mensaje = self.ir_a_salida()
         else:
             response.exito = False
-            response.mensaje = f"Comando '{request.comando}' no reconocido. Use 'Patrullar' o 'GoToExit'"
+            response.mensaje = f"Comando '{request.comando}' no reconocido."
         
         return response
 
     def patrullar(self):
-        """Navega por todas las estancias de la casa"""
         self.get_logger().info('Iniciando patrullaje...')
         
-        # Puntos de patrullaje para recorrer toda la casa
+        # Puntos de patrullaje e intermedios para recorrer toda la casa
         puntos_patrullaje = [
             self.crear_pose(2.0, -2.0, 0.0),    # salida
             self.crear_pose(-6.0, -3.0, 0.0),   # habitacion abajo
@@ -62,7 +59,6 @@ class ServidorComandos(Node):
             self.crear_pose(6.0, -2.0, 0.0)     # habitacion mesa
         ]
         
-        # Navegar a través de cada punto
         for i, punto in enumerate(puntos_patrullaje):
             self.get_logger().info(f'Navegando al punto {i+1}/{len(puntos_patrullaje)}')
             self.navigator.goToPose(punto)
@@ -81,10 +77,9 @@ class ServidorComandos(Node):
         return True, mensaje
 
     def ir_a_salida(self):
-        """Navega hacia la salida de la casa"""
         self.get_logger().info('Navegando a la salida...')
         
-        # Coordenadas de la salida (ajustar según el mapa)
+        # Coordenadas de la salida
         salida = self.crear_pose(2.0, -2.0, 0.0)
         
         self.navigator.goToPose(salida)

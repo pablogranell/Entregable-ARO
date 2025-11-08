@@ -12,10 +12,7 @@ class ClienteComandos(Node):
         while not self.cliente.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('Esperando al servidor de comandos...')
         
-        self.get_logger().info('Cliente de comandos conectado')
-
     def enviar_comando(self, comando):
-        """Envía un comando al servidor y espera la respuesta"""
         request = ComandoNavegacion.Request()
         request.comando = comando
         
@@ -36,14 +33,6 @@ class ClienteComandos(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    
-    if len(sys.argv) < 2:
-        print("\nUso: ros2 run servicio_comandos cliente_comandos <comando>")
-        print("Comandos disponibles:")
-        print("  - Patrullar")
-        print("  - GoToExit")
-        print("\nEjemplo: ros2 run servicio_comandos cliente_comandos Patrullar\n")
-        return
     
     comando = sys.argv[1]
     cliente = ClienteComandos()
