@@ -7,7 +7,7 @@ source /opt/ros/humble/setup.bash;
 source src/install/setup.bash;
 source ../turtlebot3_ws/install/setup.bash;
 export TURTLEBOT3_MODEL=waffle;
-ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py;
+ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py headless:=True;
 exec bash" &
 
 # Terminal 2: Lanzar Nav2

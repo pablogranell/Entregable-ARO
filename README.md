@@ -35,11 +35,14 @@ bash scripts/paso5_nav2.sh
 ## TAREA 1: Navegación Autónoma y Servicio de Comandos
 
 ### Ejecutar todo (5 terminales)
+Desde el directorio raiz Entregable-ARO:
 ```bash
 bash scripts/ejecutar_todo.sh
 ```
 
 NOTA: Pulsar ENTER en cada terminal para continuar el proceso una vez nos aseguramos de que el servidor de gazebo esta funcionando correctamente.
+
+Cuando todo haya cargado, seleccionar la posicion inicial aproximada del robot con 2D pose estimate en RViz.
 
 Luego ejecutar en otra terminal:
 ```bash
