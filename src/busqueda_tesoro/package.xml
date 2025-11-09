@@ -3,7 +3,7 @@
 <package format="3">
   <name>busqueda_tesoro</name>
   <version>0.0.0</version>
-  <description>Paquete de búsqueda del tesoro con Turtlebot3</description>
+  <description>Descripcion</description>
   <maintainer email="user@todo.todo">user</maintainer>
   <license>TODO: License declaration</license>
 

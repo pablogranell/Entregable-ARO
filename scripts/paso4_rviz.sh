@@ -7,4 +7,5 @@ source "$SCRIPT_DIR/setup_env.sh"
 # Ruta relativa al mapa
 MAPA_PATH="$SCRIPT_DIR/../mapas/casa_map.yaml"
 
+# Ejecutar RViz con el mapa cargado
 ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:="$MAPA_PATH"

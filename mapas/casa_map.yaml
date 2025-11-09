@@ -1,6 +1,7 @@
 image: casa_map.pgm
 mode: trinary
 resolution: 0.05
+# Ajustado en función del nuevo tamaño del mapa
 origin: [-8.79, -6.42, 0]
 negate: 0
 occupied_thresh: 0.65

@@ -15,7 +15,7 @@ setup(
     zip_safe=True,
     maintainer='user',
     maintainer_email='user@todo.todo',
-    description='Servidor y cliente de comandos de navegación para Turtlebot3',
+    description='Descripcion',
     license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={

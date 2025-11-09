@@ -42,8 +42,6 @@ bash scripts/ejecutar_todo.sh
 
 NOTA: Pulsar ENTER en cada terminal para continuar el proceso una vez nos aseguramos de que el servidor de gazebo esta funcionando correctamente.
 
-Cuando todo haya cargado, seleccionar la posicion inicial aproximada del robot con 2D pose estimate en RViz.
-
 Luego ejecutar en otra terminal:
 ```bash
 source src/install/setup.bash
@@ -53,6 +51,16 @@ ros2 run servicio_comandos cliente_comandos GoToExit
 
 El robot empezara a navegar en base a los comandos recibidos.
 
+## TAREA 2: Búsqueda Autónoma del Tesoro
+
+### Ejecutar todo (5 terminales)
+
+Desde el directorio raiz Entregable-ARO:
+```bash
+bash scripts/ejecutar_todo2.sh
+```
+NOTA: El nodo de búsqueda autónoma y el nodo del tesoro a veces no consiguen ejecutarse correctamente, si esto fuera el caso usar Ctrl+C para cerrarlos y volver a ejecutar los comandos.
+
 ## Instalación
 ```bash
 cd ~/turtlebot3_ws/src/
@@ -60,7 +68,6 @@ git clone https://github.com/pablogranell/Trabajo-ARO .
 ```
 
 ```bash
-sudo apt install ros-humble-cartographer ros-humble-cartographer-ros
 sudo dpkg --install ros-humble-tesoro-pkg_0.0.0-0jammy_amd64.deb
 ```
 

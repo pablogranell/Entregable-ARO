@@ -3,7 +3,7 @@
 <package format="3">
   <name>minimal_interfaces</name>
   <version>0.0.1</version>
-  <description>Interfaces personalizadas para comandos de navegación</description>
+  <description>Descripcion</description>
   <maintainer email="user@todo.todo">User</maintainer>
   <license>Apache License 2.0</license>
 

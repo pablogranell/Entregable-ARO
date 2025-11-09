@@ -3,7 +3,7 @@
 <package format="3">
   <name>servicio_comandos</name>
   <version>0.0.1</version>
-  <description>Servicio de comandos de navegación para Turtlebot3</description>
+  <description>Descripcion</description>
   <maintainer email="user@todo.todo">User</maintainer>
   <license>Apache License 2.0</license>
 
