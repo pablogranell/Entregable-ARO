@@ -11,8 +11,7 @@ ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py headless:=True;
 exec bash" &
 
 # Terminal 2: Lanzar Nav2
-x-terminal-emulator -T "Navigation" -e bash -c "
-echo '=== Terminal Navegación ===';
+x-terminal-emulator -T "Navegacion" -e bash -c "
 echo 'Presiona ENTER para lanzar Nav2...';
 read;
 echo 'Lanzando Navegación...';
@@ -24,7 +23,6 @@ exec bash" &
 
 # Terminal 3: Lanzar RViz
 x-terminal-emulator -T "RViz" -e bash -c "
-echo '=== Terminal RViz ===';
 echo 'Presiona ENTER para lanzar RViz...';
 read;
 echo 'Lanzando RViz...';
@@ -36,7 +34,6 @@ exec bash" &
 
 # Terminal 4: Lanzar el servidor de comandos
 x-terminal-emulator -T "Servidor de Comandos" -e bash -c "
-echo '=== Terminal Servidor de Comandos ===';
 echo 'Presiona ENTER para lanzar el servidor...';
 read;
 echo 'Lanzando Servidor de Comandos...';
@@ -46,8 +43,7 @@ ros2 run servicio_comandos servidor_comandos;
 exec bash" &
 
 # Terminal 5: Lanzar el cliente de comandos (con instrucciones)
-x-terminal-emulator -T "Cliente de Gazebo" -e bash -c "
-echo '=== Terminal Cliente de Gazebo ===';
+x-terminal-emulator -T "Gazebo GUI" -e bash -c "
 echo 'Presiona ENTER para lanzar el cliente...';
 read;
 echo 'Lanzando Cliente de Gazebo...';

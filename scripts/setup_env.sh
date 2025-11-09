@@ -23,6 +23,6 @@ export TURTLEBOT3_MODEL=waffle
 GAZEBO_MODELS="$SRC_DIR/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/models"
 export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:$GAZEBO_MODELS
 
-echo "   - ROS_DISTRO: $ROS_DISTRO"
-echo "   - TURTLEBOT3_MODEL: $TURTLEBOT3_MODEL"
-echo "   - Workspace: $WORKSPACE_DIR"
+echo "ROS_DISTRO: $ROS_DISTRO"
+echo "TURTLEBOT3_MODEL: $TURTLEBOT3_MODEL"
+echo "Workspace: $WORKSPACE_DIR"

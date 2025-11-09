@@ -9,4 +9,5 @@ MAPAS_DIR="$SCRIPT_DIR/../mapas"
 mkdir -p "$MAPAS_DIR"
 cd "$MAPAS_DIR"
 
+# Guardar el mapa usando map_saver_cli
 ros2 run nav2_map_server map_saver_cli -f casa_map

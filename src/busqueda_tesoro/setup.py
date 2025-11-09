@@ -15,7 +15,7 @@ setup(
     zip_safe=True,
     maintainer='user',
     maintainer_email='user@todo.todo',
-    description='Paquete de búsqueda del tesoro con Turtlebot3',
+    description='Descripcion',
     license='TODO: License declaration',
     extras_require={
         'test': [

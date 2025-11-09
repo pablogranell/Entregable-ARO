@@ -3,20 +3,18 @@
 # Compilar primero
 colcon build --packages-select busqueda_tesoro minimal_interfaces tesoro_pkg
 
-# Terminal 1: Lanzar la simulación de Gazebo con el mundo de la casa
-x-terminal-emulator -T "Gazebo - Tarea 2" -e bash -c "
-echo '=== GAZEBO - Simulación ===';
-echo 'Lanzando Gazebo con el mundo de la casa...';
+# Terminal 1: Lanzar la simulación de Gazebo
+x-terminal-emulator -T "Gazebo" -e bash -c "
+echo 'Lanzando Gazebo...';
 source /opt/ros/humble/setup.bash;
 source src/install/setup.bash;
 source ../turtlebot3_ws/install/setup.bash;
 export TURTLEBOT3_MODEL=waffle;
-ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py headless:=False;
+ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py headless:=True;
 exec bash" &
 
 # Terminal 2: Lanzar Nav2
-x-terminal-emulator -T "Nav2 - Navegacion" -e bash -c "
-echo '=== NAV2 - Sistema de Navegación ===';
+x-terminal-emulator -T "Navegacion" -e bash -c "
 echo 'Presiona ENTER para lanzar Nav2...';
 read;
 echo 'Lanzando Nav2...';
@@ -27,8 +25,7 @@ ros2 launch nav2_bringup bringup_launch.py map:=mapas/casa_map.yaml use_sim_time
 exec bash" &
 
 # Terminal 3: Lanzar RViz
-x-terminal-emulator -T "RViz - Visualizacion" -e bash -c "
-echo '=== RVIZ - Visualización ===';
+x-terminal-emulator -T "RViz" -e bash -c "
 echo 'Presiona ENTER para lanzar RViz...';
 read;
 echo 'Lanzando RViz...';
@@ -39,24 +36,21 @@ ros2 launch nav2_bringup rviz_launch.py;
 exec bash" &
 
 # Terminal 4: Lanzar el nodo del tesoro
-x-terminal-emulator -T "Tesoro - Publicador" -e bash -c "
-echo '=== NODO DEL TESORO ===';
-echo 'Presiona ENTER para iniciar el nodo del tesoro...';
+x-terminal-emulator -T "Publicador de Tesoro" -e bash -c "
+echo 'Presiona ENTER para iniciar el publicador del tesoro...';
 read;
+echo 'Iniciando publicador del tesoro...';
 source /opt/ros/humble/setup.bash;
 source src/install/setup.bash;
-echo 'Iniciando nodo del tesoro...';
-echo '';
 ros2 run tesoro_pkg tesoro_nodo;
 exec bash" &
 
 # Terminal 5: Lanzar el nodo de búsqueda
-x-terminal-emulator -T "Busqueda Autonoma - Tarea 2" -e bash -c "
-echo '=== BÚSQUEDA AUTÓNOMA DEL TESORO - TAREA 2 ===';
+x-terminal-emulator -T "Busqueda autonoma del tesoro" -e bash -c "
 echo 'Presiona ENTER para iniciar la búsqueda autónoma...';
 read;
+echo 'Iniciando nodo de búsqueda autónoma...';
 source /opt/ros/humble/setup.bash;
 source src/install/setup.bash;
-echo 'Iniciando nodo de búsqueda autónoma...';
-ros2 run busqueda_tesoro busqueda_nodo --ros-args --param use_sim_time:=true;
+ros2 run busqueda_tesoro busqueda_nodo use_sim_time:=True;
 exec bash" &
