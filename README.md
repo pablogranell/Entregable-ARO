@@ -46,6 +46,7 @@ Cuando todo haya cargado, seleccionar la posicion inicial aproximada del robot c
 
 Luego ejecutar en otra terminal:
 ```bash
+source src/install/setup.bash
 ros2 run servicio_comandos cliente_comandos Patrullar
 ros2 run servicio_comandos cliente_comandos GoToExit
 ```

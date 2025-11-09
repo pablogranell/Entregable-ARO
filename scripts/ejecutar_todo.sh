@@ -19,7 +19,7 @@ echo 'Lanzando Navegación...';
 source /opt/ros/humble/setup.bash;
 source src/install/setup.bash;
 export TURTLEBOT3_MODEL=waffle;
-ros2 launch nav2_bringup bringup_launch.py map:=mapas/casa_map.yaml use_sim_time:=True;
+ros2 launch nav2_bringup bringup_launch.py map:=mapas/casa_map.yaml use_sim_time:=True params_file:=src/busqueda_tesoro/config/turtlebot3_params.yaml
 exec bash" &
 
 # Terminal 3: Lanzar RViz

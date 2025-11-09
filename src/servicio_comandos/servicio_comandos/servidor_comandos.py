@@ -45,7 +45,7 @@ class ServidorComandos(Node):
         return response
 
     def patrullar(self):
-        self.get_logger().info('Iniciando patrullaje...')
+        self.get_logger().info('Iniciando patrullaje continuo...')
         
         # Puntos de patrullaje e intermedios para recorrer toda la casa
         puntos_patrullaje = [
@@ -56,25 +56,28 @@ class ServidorComandos(Node):
             self.crear_pose(7.0, 4.0, 0.0),     # habitacion arriba
             self.crear_pose(1.0, 2.0, 0.0),     # habitacion en medio
             self.crear_pose(7.0, 4.0, 0.0),     # habitacion arriba
-            self.crear_pose(6.0, -2.0, 0.0)     # habitacion mesa
+            self.crear_pose(6.0, -1.0, 0.0)     # habitacion mesa
         ]
         
-        for i, punto in enumerate(puntos_patrullaje):
-            self.get_logger().info(f'Navegando al punto {i+1}/{len(puntos_patrullaje)}')
-            self.navigator.goToPose(punto)
+        ronda = 0
+        while True:  # Bucle continuo
+            ronda += 1
+            self.get_logger().info(f'Iniciando ronda de patrullaje {ronda}')
             
-            while not self.navigator.isTaskComplete():
-                time.sleep(0.1)
+            for i, punto in enumerate(puntos_patrullaje):
+                self.get_logger().info(f'Ronda {ronda}: Navegando al punto {i+1}/{len(puntos_patrullaje)}')
+                self.navigator.goToPose(punto)
+                
+                while not self.navigator.isTaskComplete():
+                    time.sleep(0.1)
+                
+                resultado = self.navigator.getResult()
+                if resultado != TaskResult.SUCCEEDED:
+                    self.get_logger().warning(f"Fallo en punto {i+1}, continuando patrullaje...")
+                    continue  # Continuar con el siguiente punto en lugar de fallar
             
-            resultado = self.navigator.getResult()
-            if resultado != TaskResult.SUCCEEDED:
-                mensaje = f"Patrullaje fallido en punto {i+1}"
-                self.get_logger().error(mensaje)
-                return False, mensaje
-        
-        mensaje = "Patrullaje completado con éxito"
-        self.get_logger().info(mensaje)
-        return True, mensaje
+            self.get_logger().info(f'Ronda {ronda} completada, iniciando siguiente ronda...')
+            time.sleep(1.0)  # Pequeña pausa entre rondas
 
     def ir_a_salida(self):
         self.get_logger().info('Navegando a la salida...')
