@@ -13,9 +13,9 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='pablo',
-    maintainer_email='pablo@todo.todo',
-    description='TODO: Package description',
+    maintainer='user',
+    maintainer_email='user@todo.todo',
+    description='Paquete de búsqueda del tesoro con Turtlebot3',
     license='TODO: License declaration',
     extras_require={
         'test': [
@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'busqueda_nodo = busqueda_tesoro.busqueda_nodo:main'
         ],
     },
 )

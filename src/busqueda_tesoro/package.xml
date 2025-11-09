@@ -3,13 +3,13 @@
 <package format="3">
   <name>busqueda_tesoro</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="pablo@todo.todo">pablo</maintainer>
+  <description>Paquete de búsqueda del tesoro con Turtlebot3</description>
+  <maintainer email="user@todo.todo">user</maintainer>
   <license>TODO: License declaration</license>
 
   <depend>rclpy</depend>
-  <depend>std_msgs</depend>
   <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
