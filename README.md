@@ -77,5 +77,5 @@ colcon build --symlink-install
 source src/install/setup.bash
 cd ../Trabajo-ARO/src
 colcon build --symlink-install
-source src/install/setup.bash
+source install/setup.bash
 ```
