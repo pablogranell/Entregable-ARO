@@ -1,2 +1,15 @@
-* text eol=lf
-*.png             binary
+# Archivos de texto con LF
+*.txt text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.yaml text eol=lf
+
+# Archivos binarios (no convertir)
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.pdf binary
+*.zip binary
+*.exe binary
