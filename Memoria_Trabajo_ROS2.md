@@ -143,15 +143,13 @@ string mensaje
 
 ```python
 def comando_callback(self, request, response):
-    ...
     # Arbol de decisiones para enrutar los comandos a funciones específicas
     if request.comando == "Patrullar":
         response.exito, response.mensaje = self.patrullar()
     elif request.comando == "GoToExit":
         response.exito, response.mensaje = self.ir_a_salida()
-    ...
 ```
-![Comando Salida](imgs/img6.png)
+![Comando Patrullar](imgs/img6.png)
 
 ### 4.4 Problemas Encontrados y Soluciones
 
@@ -174,7 +172,7 @@ Desarrollar un nodo autónomo que busca un "tesoro" por dentro o fuera de la cas
 
 **Resumen del Sistema**
 
-![Diagrama de estados](imgs/img2.png){width=30%}
+![Diagrama de estados](imgs/img2.png){width=25%}
 
 ### 5.2 Estrategia de Búsqueda
 
@@ -251,52 +249,35 @@ Para asegurarse de que el servidor de Gazebo esté listo antes de iniciar SLAM y
 
 ### 7.1 Configuración del Robot
 
-**`turtlebot3_params.yaml`**
+**Parámetros físicos y cinemáticos:**
 ```yaml
-robot:
-  # Dimensiones físicas del waffle
-  radius: 0.220
-  wheel_base: 0.287
-  
-  # Límites de velocidad
-  max_linear_vel: 0.26
-  max_angular_vel: 1.82
-  
-  # Parametros de aceleración
-  linear_acc: 2.5
-  angular_acc: 3.2
+robot_radius: 0.14          # Radio del robot para costmaps
+wheel_base: 0.287           # Distancia entre ruedas
 
-  # Parametros del sensor láser
-  laser:
-    min_range: 0.12
-    max_range: 3.5
-    min_angle: -3.14159
-    max_angle: 3.14159
-    samples: 360
+max_vel_x: 0.26            # Velocidad lineal máxima (m/s)
+max_vel_theta: 1.0         # Velocidad angular máxima (rad/s)
+
+acc_lim_x: 2.5             # Aceleración lineal (m/s²)
+acc_lim_theta: 3.2         # Aceleración angular (rad/s²)
 ```
 
 ### 7.2 Parámetros de Navegación
 
+De estos parametros hemos cambiado ciertos ajustes del coste para que la planficacion no fuera tan restrictiva y el robot pudiera navegar mejor las esquinas.
+
 ```yaml
-nav2:
-  # Planificador de ruta
-  planner:
-    plugin: "nav2_navfn_planner/NavfnPlanner"
-    tolerance: 0.5
-    use_astar: false
+local_costmap:                   # Costmap local (3x3m, centrado en robot)
+  resolution: 0.05               # 5cm por píxel
+  inflation_radius: 0.55         # Radio de inflación obstáculos
+  cost_scaling_factor: 5.0       # Factor escalado costes
+  
+global_costmap:                 # Costmap global (basado en el mapa)
+  track_unknown_space: true     # Importante para exploración exterior
+  obstacle_max_range: 2.5        # Rango máximo detección obstáculos
 
-  # Controlador de trayectoria
-  controller:
-    plugin: "nav2_regulated_pure_pursuit_controller"
-    desired_linear_vel: 0.25
-    max_linear_accel: 2.5
-    lookahead_dist: 0.6
-
-  # Los mecanismos de recuperación cuando el robot se queda atascado
-  recovery:
-    - spin
-    - backup
-    - wait
+amcl:
+  max_particles: 5000           # Partículas máximas
+  laser_max_range: 100.0       # Rango máximo láser considerado
 ```
 
 ## 9. Conclusiones
