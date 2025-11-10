@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Compilar primero
+SCRIPT_DIR=$(pwd)
+cd src
+echo "path: $(pwd)"
 colcon build --packages-select busqueda_tesoro minimal_interfaces
+cd $SCRIPT_DIR
+echo "path: $(pwd)"
 
 # Terminal 1: Lanzar la simulación de Gazebo
 x-terminal-emulator -T "1. Gazebo" -e bash -c "
