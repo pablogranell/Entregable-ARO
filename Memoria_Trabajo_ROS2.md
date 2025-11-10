@@ -29,9 +29,9 @@ Entregable-ARO/
 |   |   |   |- busqueda_nodo.py
 |   |   |- config/
 |   |       |- turtlebot3_params.yaml   # Parámetros del robot
+|   |- minimal_interfaces/              # Interfaces personalizadas
 |   |   |-srv/
 |   |       |- ComandoNavegacion.srv     # Definición del servicio
-|   |- minimal_interfaces/              # Interfaces personalizadas
 |- mapas/                               # Mapas generados
 |   |- casa_map.pgm
 |   |- casa_map.yaml
@@ -73,10 +73,7 @@ Nos aseguraremos de que el robot explore toda la casa siguiendo estas pautas:
 
 **Guardado del Mapa**
 
-Una vez completada la exploración tenemos que guardar el mapa generado con el siguiente comando:
-```bash
-./scripts/paso5_mapa.sh
-```
+Una vez completada la exploración tenemos que guardar el mapa generado con `./scripts/paso5_mapa.sh`
 
 Esto genera dos archivos:
 - **casa_map.pgm:** Imagen del mapa en formato PGM (escala de grises)
@@ -140,7 +137,7 @@ string mensaje
    - Ciclo infinito por puntos predefinidos
    - Se detiene cuando el cliente deja de mandar el comando
 
-![Mapa con SLAM funcionando](imgs/img4.png){width=60%}
+![Mapa con Nav2 funcionando](imgs/img4.png){width=60%}
 
 **Arbol de decisiones de los comandos**
 
@@ -309,9 +306,3 @@ El proyecto ha cumplido satisfactoriamente todos los objetivos planteados.
 En la Tarea 0, se generó un mapa de la casa utilizando SLAM, que sirvió como base para las tareas posteriores. En la Tarea 1, se implementó un servicio de comandos que permitió al robot realizar patrullajes y regresar a la salida de manera autónoma. Finalmente, en la Tarea 2, se desarrolló un sistema de búsqueda del tesoro que demostró la capacidad del robot para navegar y localizar objetivos basándose en información recibida.
 
 Todas estas implementacions funcionan de manera resistente, adaptandose al entorno simulado y gestionando errores comunes.
-
-## Anexos
-
-### A. Comandos de Ejecución
-
-Revisar el README.md para instrucciones detalladas de instalación y ejecución.
