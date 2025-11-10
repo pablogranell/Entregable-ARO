@@ -170,7 +170,7 @@ def comando_callback(self, request, response):
 ## 5. Tarea 2: Búsqueda del Tesoro con Patrullaje
 
 ### 5.1 Objetivo
-Desarrollar un nodo autónomo que busca un "tesoro" por dentro o fuera de la casa e intenta llegar a él en 90 segundos. Para ello lee la informacion del nodo_tesoro y calcula donde estará el tesoro para localizarlo y acercarse a el.
+Desarrollar un nodo autónomo que busca un "tesoro" por dentro o fuera de la casa e intenta llegar a él en 90 segundos. Para ello lee la informacion del nodo_tesoro y calcula donde estará el tesoro para localizarlo y acercarse a él.
 
 **Resumen del Sistema**
 
@@ -182,21 +182,21 @@ Desarrollar un nodo autónomo que busca un "tesoro" por dentro o fuera de la cas
 
 El tesoro se calcula con los siguientes pasos:
 
-- Se calcula la posicion actual del robot
+- Se calcula la posición actual del robot
 
 - Se recibe el vector de distancia del tesoro y se guarda
 
 - Se suma el vector de distancia a la posición del robot para obtener la posición del tesoro
 
-La posicion de tesoro aproximada será la posición del robot más el vector de distancia al tesoro
+La posición de tesoro aproximada será la posición del robot más el vector de distancia al tesoro
 
-![Recepcion de Coordenadas del tesoro](imgs/img5.png)
+![Recepción de Coordenadas del tesoro](imgs/img5.png)
 
 ![Envio de coordenadas del tesoro](imgs/img5.1.png)
 
 ### 5.3 Acercamiento al Tesoro
 
-Una vez se recibe informacion sobre el tesoro:
+Una vez se recibe información sobre el tesoro:
 
 1. **Cálculo de posición global:** Utiliza un equivalente a AMCL para localizar el robot en el mapa
 2. **Navegación hacia el tesoro:** Envía un goal a Nav2 con la posición estimada del tesoro
@@ -209,11 +209,11 @@ Una vez se recibe informacion sobre el tesoro:
 
 - **Causa:** El tesoro puede aparecer dentro de la casa y puede haber paredes entre el robot y el tesoro
 
-- **Solución:** Utilizar Nav2 en vez de mover directamente el robot para asi utilizar la planificación de rutas de Nav2
+- **Solución:** Utilizar Nav2 en vez de mover directamente el robot para así utilizar la planificación de rutas de Nav2
 
-**Problema 2:** Robot no podia navegar por fuera de la casa
+**Problema 2:** Robot no podía navegar por fuera de la casa
 
-- **Causa:** No habia suficientes caracteristicas en el mapa para que la navegación funcionara bien
+- **Causa:** No había suficientes caracteristicas en el mapa para que la navegación funcionara bien
 
 - **Solución:** Modificar los ajustes de AMCL para mejorar la localización con menos características en exteriores.
 
@@ -265,7 +265,7 @@ acc_lim_theta: 3.2         # Aceleración angular (rad/s²)
 
 ### 7.2 Parámetros de Navegación
 
-De estos parametros hemos cambiado ciertos ajustes del coste para que la planficacion no fuera tan restrictiva y el robot pudiera navegar mejor las esquinas.
+De estos parametros hemos cambiado ciertos ajustes del coste para que la planficación no fuera tan restrictiva y el robot pudiera navegar mejor las esquinas.
 
 ```yaml
 local_costmap:                   # Costmap local (3x3m, centrado en robot)
