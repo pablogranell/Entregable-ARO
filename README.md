@@ -64,7 +64,7 @@ NOTA: El nodo de búsqueda autónoma y el nodo del tesoro a veces no consiguen e
 ## Instalación
 ```bash
 cd ~/turtlebot3_ws/src/
-git clone https://github.com/pablogranell/Trabajo-ARO .
+git clone https://github.com/pablogranell/Entregable-ARO .
 ```
 
 ```bash
@@ -72,7 +72,10 @@ sudo dpkg --install ros-humble-tesoro-pkg_0.0.0-0jammy_amd64.deb
 ```
 
 ```bash
-cd ~/turtlebot3_ws
+cd ../turtlebot3_ws
+colcon build --symlink-install
+source src/install/setup.bash
+cd ../Trabajo-ARO/src
 colcon build --symlink-install
 source src/install/setup.bash
 ```

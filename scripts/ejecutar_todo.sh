@@ -1,5 +1,7 @@
 #!/bin/bash
 
+colcon build --packages-select busqueda_tesoro minimal_interfaces tesoro_pkg
+
 # Terminal 1: Lanzar la simulación de Gazebo con el mundo de la casa
 x-terminal-emulator -T "Gazebo" -e bash -c "
 echo 'Lanzando Gazebo...';

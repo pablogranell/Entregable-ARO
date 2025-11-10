@@ -52,5 +52,5 @@ read;
 echo 'Iniciando nodo de búsqueda autónoma...';
 source /opt/ros/humble/setup.bash;
 source src/install/setup.bash;
-ros2 run busqueda_tesoro busqueda_nodo use_sim_time:=True;
+ros2 run busqueda_tesoro busqueda_nodo;
 exec bash" &
