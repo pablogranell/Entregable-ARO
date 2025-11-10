@@ -1,6 +1,7 @@
 # Sistema de Navegación Autónoma con ROS2 y Turtlebot3
 
 **Jefferson Paul Caiza Jami**
+
 **Pablo Granell Robles**
 
 
@@ -47,10 +48,6 @@ Entregable-ARO/
     |- ejecutar_todo2.sh                # Script completo para Tarea 2
 ```
 
-### 2.3 Diagrama de Componentes
-
-![Diagrama](imgs/img1.png)
-
 ## 3. Tarea 0: Mapeo de la Casa
 
 ### 3.1 Objetivo
@@ -59,28 +56,16 @@ Generar un mapa 2D del entorno simulado de la casa utilizando SLAM y Nav2 para a
 ### 3.2 Proceso de Mapeo
 
 **Ejecución de Gazebo**
-Primero necesitamos ejecutar el servidor de Gazebo con el mundo de la casa:
-```bash
-./scripts/paso1_gazebo.sh
-```
+Primero necesitamos ejecutar el servidor de Gazebo con el mundo de la casa usando el comando `./scripts/paso1_gazebo.sh`
 
 **Ejecución del SLAM**
-Luego necesitamos iniciar el proceso de SLAM para empezar a mapear el entorno y que el robot se pueda ubicar:
-```bash
-./scripts/paso2_slam.sh
-```
+Luego necesitamos iniciar el proceso de SLAM para empezar a mapear el entorno y que el robot se pueda ubicar con `./scripts/paso2_slam.sh`
 
 **Ejecución de Nav2**
-Luego tenemos que iniciar el stack de navegación Nav2 para controlar el robot durante la exploración y que así sea más sencillo recorrer la casa:
-```bash
-./scripts/paso3_nav.sh
-```
+Luego tenemos que iniciar el stack de navegación Nav2 para controlar el robot durante la exploración y que así sea más sencillo recorrer la casa con `./scripts/paso3_nav.sh`
 
 **Ejecución de Rviz**
-Finalmente, lanzamos RViz para visualizar el proceso de mapeo en tiempo real y asi poder seleccionar los puntos de exploración:
-```bash
-./scripts/paso4_rviz.sh
-```
+Finalmente, lanzamos RViz para visualizar el proceso de mapeo en tiempo real y asi poder seleccionar los puntos de exploración con `./scripts/paso4_rviz.sh`
 
 Nos aseguraremos de que el robot explore toda la casa siguiendo estas pautas:
 
@@ -100,6 +85,8 @@ Esto genera dos archivos:
 
 ### 3.3 Parámetros y mapa Final
 
+![Mapa generado de la casa](imgs/img3.png)
+
 ```yaml
 image: casa_map.pgm
 mode: trinary
@@ -108,7 +95,6 @@ origin: [-8.79, -6.42, 0]  # Posición del origen en metros
 occupied_thresh: 0.65   # Umbral para celdas ocupadas
 free_thresh: 0.25       # Umbral para celdas libres
 ```
-![Mapa generado de la casa](imgs/img3.png)
 
 ### 3.4 Problemas Encontrados y Soluciones
 
@@ -124,7 +110,7 @@ free_thresh: 0.25       # Umbral para celdas libres
 
 - **Solución:** Ajuste manual en GIMP para limpiar el mapa y asegurar paredes completas
 
-![Comando utilizado en GIMP para aumentar el tamaño del mapa](imgs/img8.png)
+![Comando utilizado en GIMP para aumentar el tamaño del mapa](imgs/img8.png){width=50%}
 
 ## 4. Tarea 1: Servicio de Comandos de Navegación
 
@@ -163,9 +149,9 @@ class ServidorComandos(Node):
 
 2. **Patrullar:** Patrullaje continuo por waypoints predefinidos
    - Ciclo infinito por puntos predefinidos
-   - Se detiene cuando el cliente para
+   - Se detiene cuando el cliente deja de mandar el comando
 
-![Mapa con SLAM funcionando](imgs/img4.png)
+![Mapa con SLAM funcionando](imgs/img4.png){width=60%}
 
 **Arbol de decisiones de los comandos**
 
@@ -200,6 +186,10 @@ def comando_callback(self, request, response):
 ### 5.1 Objetivo
 Desarrollar un nodo autónomo que busca un "tesoro" por dentro o fuera de la casa y llega a el en menos de 90 segundos. Para ello lee la informacion del nodo_tesoro y se basa a partir de esa informacion para localizarlo y acercarse a el.
 
+**Resumen del Sistema**
+
+![Diagrama de estados](imgs/img2.png){width=30%}
+
 ### 5.2 Estrategia de Búsqueda
 
 **Algoritmo de Detección**
@@ -212,7 +202,7 @@ El tesoro se calcula con los siguientes pasos:
 
 - Se suma el vector de distancia a la posición del robot para obtener la posición del tesoro
 
-- La posicion de tesoro aproximada será la posición del robot más el vector de distancia al tesoro
+La posicion de tesoro aproximada será la posición del robot más el vector de distancia al tesoro
 
 ![Recepcion de Coordenadas del tesoro](imgs/img5.png)
 
@@ -226,10 +216,6 @@ Una vez se recibe informacion sobre el tesoro:
 2. **Navegación hacia el tesoro:** Envía un goal a Nav2 con la posición estimada del tesoro
 3. **Monitoreo continuo:** Nav2 navega autónomamente hacia el tesoro, evitando los obstáculos y planificando automáticamente la ruta.
 4. **Tesoro:** El tesoro se considera encontrado al estar a < 0.5m del mismo.
-
-**Resumen del del Sistema**
-
-![Diagrama de estados](imgs/img2.png){width=30%}
 
 ### 5.6 Problemas Encontrados y Soluciones
 
@@ -253,30 +239,19 @@ Para facilitar la ejecución y pruebas del sistema, se desarrollaron varios scri
 
 ### 6.1 Scripts Principales
 
-**`setup_env.sh`**
+**`setup_env.sh`**: Configura el entorno ROS2 y se utiliza de manera auxiliar en todos los demas scripts.
 
-Configura el entorno ROS2 y se utiliza de manera auxiliar en todos los demas scripts.
+**`paso1_gazebo.sh`**: Lanza Gazebo con el mundo de la casa con `./scripts/paso1_gazebo.sh`
 
-**`paso1_gazebo.sh`**
+**`paso2_slam.sh`**: Inicia SLAM para mapeo con `./scripts/paso2_slam.sh`
 
-Lanza Gazebo con el mundo de la casa con `./scripts/paso1_gazebo.sh`
+**`paso3_nav.sh`**: Lanza el stack de navegación Nav2 con `./scripts/paso3_nav.sh`
 
-**`paso2_slam.sh`**
+**`paso4_rviz.sh`**: Lanza RViz para visualización con `./scripts/paso4_rviz.sh`
 
-Inicia SLAM para mapeo con `./scripts/paso2_slam.sh`
+**`paso5_mapa.sh`**: Guarda el mapa generado con `./scripts/paso5_mapa.sh`
 
-**`paso3_nav.sh`**
-
-Lanza el stack de navegación Nav2 con `./scripts/paso3_nav.sh`
-
-**`paso4_rviz.sh`**
-
-Lanza RViz para visualización con `./scripts/paso4_rviz.sh`
-
-**`paso5_mapa.sh`**
-Guarda el mapa generado con `./scripts/paso5_mapa.sh`
-
-**`ejecutar_todo.sh`**
+**`ejecutar_todo.sh`**:
 Script maestro que lanza todo el sistema necesario para la Tarea 1.
 Compila ademas el workspace antes de lanzar todo.
 Para asegurarse de que el servidor de Gazebo esté listo antes de iniciar SLAM y Nav2, incluye una barrera que se sobrepasa pulsando ENTER.
@@ -340,7 +315,11 @@ nav2:
 
 ## 9. Conclusiones
 
-El proyecto ha cumplido satisfactoriamente todos los objetivos planteados. En la Tarea 0, se generó un mapa de la casa utilizando SLAM, que sirvió como base para las tareas posteriores. En la Tarea 1, se implementó un servicio de comandos que permitió al robot realizar patrullajes y regresar a la salida de manera autónoma. Finalmente, en la Tarea 2, se desarrolló un sistema de búsqueda del tesoro que demostró la capacidad del robot para navegar y localizar objetivos basándose en información recibida. Todas estas implementacions funcionan de manera resistente, adaptandose al entorno simulado y gestionando errores comunes.
+El proyecto ha cumplido satisfactoriamente todos los objetivos planteados.
+
+En la Tarea 0, se generó un mapa de la casa utilizando SLAM, que sirvió como base para las tareas posteriores. En la Tarea 1, se implementó un servicio de comandos que permitió al robot realizar patrullajes y regresar a la salida de manera autónoma. Finalmente, en la Tarea 2, se desarrolló un sistema de búsqueda del tesoro que demostró la capacidad del robot para navegar y localizar objetivos basándose en información recibida.
+
+Todas estas implementacions funcionan de manera resistente, adaptandose al entorno simulado y gestionando errores comunes.
 
 ## Anexos
 
