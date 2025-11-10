@@ -1,9 +1,9 @@
 #!/bin/bash
 
-colcon build --packages-select busqueda_tesoro minimal_interfaces tesoro_pkg
+colcon build --packages-select busqueda_tesoro minimal_interfaces
 
 # Terminal 1: Lanzar la simulación de Gazebo con el mundo de la casa
-x-terminal-emulator -T "Gazebo" -e bash -c "
+x-terminal-emulator -T "1. Gazebo" -e bash -c "
 echo 'Lanzando Gazebo...';
 source /opt/ros/humble/setup.bash;
 source src/install/setup.bash;
@@ -13,7 +13,7 @@ ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py headless:=True;
 exec bash" &
 
 # Terminal 2: Lanzar Nav2
-x-terminal-emulator -T "Navegacion" -e bash -c "
+x-terminal-emulator -T "2. Navegacion" -e bash -c "
 echo 'Presiona ENTER para lanzar Nav2...';
 read;
 echo 'Lanzando Navegación...';
@@ -24,7 +24,7 @@ ros2 launch nav2_bringup bringup_launch.py map:=mapas/casa_map.yaml use_sim_time
 exec bash" &
 
 # Terminal 3: Lanzar RViz
-x-terminal-emulator -T "RViz" -e bash -c "
+x-terminal-emulator -T "3. RViz" -e bash -c "
 echo 'Presiona ENTER para lanzar RViz...';
 read;
 echo 'Lanzando RViz...';
@@ -35,7 +35,7 @@ ros2 launch nav2_bringup rviz_launch.py;
 exec bash" &
 
 # Terminal 4: Lanzar el servidor de comandos
-x-terminal-emulator -T "Servidor de Comandos" -e bash -c "
+x-terminal-emulator -T "4. Servidor de Comandos" -e bash -c "
 echo 'Presiona ENTER para lanzar el servidor...';
 read;
 echo 'Lanzando Servidor de Comandos...';
@@ -45,11 +45,11 @@ ros2 run servicio_comandos servidor_comandos;
 exec bash" &
 
 # Terminal 5: Lanzar el cliente de comandos (con instrucciones)
-x-terminal-emulator -T "Gazebo GUI" -e bash -c "
-echo 'Presiona ENTER para lanzar el cliente...';
+x-terminal-emulator -T "5. Comando Patrullar" -e bash -c "
+echo 'Presiona ENTER para lanzar el comando...';
 read;
-echo 'Lanzando Cliente de Gazebo...';
+echo 'Lanzando comando...';
 source /opt/ros/humble/setup.bash;
 source src/install/setup.bash;
-gzclient --gui-client-plugin=libgazebo_ros_eol_gui.so
+ros2 run servicio_comandos cliente_comandos Patrullar
 exec bash" &

@@ -29,14 +29,13 @@ Entregable-ARO/
 |   |   |   |- busqueda_nodo.py
 |   |   |- config/
 |   |       |- turtlebot3_params.yaml   # Parámetros del robot
-|   |   |minimal_interfaces/              # Interfaces personalizadas
 |   |   |-srv/
 |   |       |- ComandoNavegacion.srv     # Definición del servicio
 |   |- minimal_interfaces/              # Interfaces personalizadas
 |- mapas/                               # Mapas generados
 |   |- casa_map.pgm
 |   |- casa_map.yaml
-|- scripts/                             # Scripts de automatización
+|- scripts/                             # Scripts de automatización y auxiliares
     |- setup_env.sh                     # Configuración del entorno
     |- paso1_gazebo.sh                  # Lanzamiento de Gazebo
     |- paso2_slam.sh                    # Lanzamiento de SLAM
@@ -115,7 +114,7 @@ free_thresh: 0.25       # Umbral para celdas libres
 ## 4. Tarea 1: Servicio de Comandos de Navegación
 
 ### 4.1 Objetivo
-Desarrollar un servicio ROS2 que permita enviar comandos de navegación al robot, abstrayendo la complejidad del stack Nav2. La implementacion inicial incluye el comando de patrullaje y retorno a la salida.
+Desarrollar un servicio ROS2 que permita enviar comandos de navegación al robot, abstrayendo la complejidad de Nav2. La implementacion incluye el comando de patrullaje y retorno a la salida.
 
 ### 4.2 Definición del Servicio
 Se creó una interfaz personalizada `ComandoNavegacion.srv`:
@@ -130,16 +129,6 @@ string mensaje
 ```
 
 ### 4.3 Implementación del Servidor
-
-**Estructura del Servidor (`servidor_comandos.py`)**
-
-```python
-class ServidorComandos(Node):
-    def __init__(self):
-        super().__init__('servidor_comandos')
-        # Crear el servidor ROS2 para recibir los comandos
-        # Inicializa el navigator Nav2 para control del robot
-```
 
 **Comandos Implementados**
 
@@ -175,16 +164,16 @@ def comando_callback(self, request, response):
 
 - **Solución:** Implementar flag `self.patrullando` y bucle infinito
 
-**Problema 2:** Puntos de patrullaje o salida incorrectos
+**Problema 2:** Puntos de patrullaje y zonas complejas
 
-- **Causa:** Puntos descolocados en base al mapa
+- **Causa:** Puntos con obstáculos que tienden a producir que el robot no encuentre un camino hacia el objetivo
 
-- **Solución:** Ajuste manual de coordenadas tras pruebas
+- **Solución:** Ajuste manual de las coordenadas de los puntos tras pruebas
 
 ## 5. Tarea 2: Búsqueda del Tesoro con Patrullaje
 
 ### 5.1 Objetivo
-Desarrollar un nodo autónomo que busca un "tesoro" por dentro o fuera de la casa y llega a el en menos de 90 segundos. Para ello lee la informacion del nodo_tesoro y se basa a partir de esa informacion para localizarlo y acercarse a el.
+Desarrollar un nodo autónomo que busca un "tesoro" por dentro o fuera de la casa e intenta llegar a él en 90 segundos. Para ello lee la informacion del nodo_tesoro y calcula donde estará el tesoro para localizarlo y acercarse a el.
 
 **Resumen del Sistema**
 
