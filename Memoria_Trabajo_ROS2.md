@@ -124,6 +124,8 @@ free_thresh: 0.25       # Umbral para celdas libres
 
 - **Solución:** Ajuste manual en GIMP para limpiar el mapa y asegurar paredes completas
 
+![Comando utilizado en GIMP para aumentar el tamaño del mapa](imgs/img8.png)
+
 ## 4. Tarea 1: Servicio de Comandos de Navegación
 
 ### 4.1 Objetivo
@@ -252,32 +254,27 @@ Para facilitar la ejecución y pruebas del sistema, se desarrollaron varios scri
 ### 6.1 Scripts Principales
 
 **`setup_env.sh`**
-Configura el entorno ROS2:
-```bash
-#!/bin/bash
-source /opt/ros/humble/setup.bash
-source ~/turtlebot3_ws/install/setup.bash
-export TURTLEBOT3_MODEL=waffle_pi
-export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/Entregable-ARO/models
-```
+
+Configura el entorno ROS2 y se utiliza de manera auxiliar en todos los demas scripts.
 
 **`paso1_gazebo.sh`**
-Lanza Gazebo con el mundo de la casa:
-```bash
-ros2 launch turtlebot3_gazebo turtlebot3_house.launch.py
-```
+
+Lanza Gazebo con el mundo de la casa con `./scripts/paso1_gazebo.sh`
 
 **`paso2_slam.sh`**
-Inicia SLAM para mapeo:
-```bash
-ros2 launch slam_toolbox online_async_launch.py use_sim_time:=true
-```
+
+Inicia SLAM para mapeo con `./scripts/paso2_slam.sh`
 
 **`paso3_nav.sh`**
-Lanza el stack de navegación Nav2:
-```bash
-ros2 launch turtlebot3_navigation2 navigation2.launch.py use_sim_time:=True map:=./mapas/casa_map.yaml
-```
+
+Lanza el stack de navegación Nav2 con `./scripts/paso3_nav.sh`
+
+**`paso4_rviz.sh`**
+
+Lanza RViz para visualización con `./scripts/paso4_rviz.sh`
+
+**`paso5_mapa.sh`**
+Guarda el mapa generado con `./scripts/paso5_mapa.sh`
 
 **`ejecutar_todo.sh`**
 Script maestro que lanza todo el sistema necesario para la Tarea 1.
@@ -293,10 +290,10 @@ Para asegurarse de que el servidor de Gazebo esté listo antes de iniciar SLAM y
 
 ### 7.1 Configuración del Robot
 
-#### 7.1.1 `turtlebot3_params.yaml`
+**`turtlebot3_params.yaml`**
 ```yaml
 robot:
-  # Dimensiones físicas
+  # Dimensiones físicas del waffle
   radius: 0.220
   wheel_base: 0.287
   
@@ -304,11 +301,11 @@ robot:
   max_linear_vel: 0.26
   max_angular_vel: 1.82
   
-  # Aceleraciones
+  # Parametros de aceleración
   linear_acc: 2.5
   angular_acc: 3.2
-  
-  # Sensor láser
+
+  # Parametros del sensor láser
   laser:
     min_range: 0.12
     max_range: 3.5
@@ -321,20 +318,20 @@ robot:
 
 ```yaml
 nav2:
-  # Planner
+  # Planificador de ruta
   planner:
     plugin: "nav2_navfn_planner/NavfnPlanner"
     tolerance: 0.5
     use_astar: false
-    
-  # Controller
+
+  # Controlador de trayectoria
   controller:
     plugin: "nav2_regulated_pure_pursuit_controller"
     desired_linear_vel: 0.25
     max_linear_accel: 2.5
     lookahead_dist: 0.6
-    
-  # Recovery behaviors
+
+  # Los mecanismos de recuperación cuando el robot se queda atascado
   recovery:
     - spin
     - backup
@@ -343,30 +340,10 @@ nav2:
 
 ## 9. Conclusiones
 
-El proyecto ha cumplido satisfactoriamente todos los objetivos planteados:
-
-**Tarea 0:** Mapa completo y preciso de la casa generado con SLAM
-
-**Tarea 1:** Servicio de comandos funcional con 8 comandos implementados  
-
-**Tarea 2:** Sistema autónomo de búsqueda con patrullaje efectivo
+El proyecto ha cumplido satisfactoriamente todos los objetivos planteados. En la Tarea 0, se generó un mapa de la casa utilizando SLAM, que sirvió como base para las tareas posteriores. En la Tarea 1, se implementó un servicio de comandos que permitió al robot realizar patrullajes y regresar a la salida de manera autónoma. Finalmente, en la Tarea 2, se desarrolló un sistema de búsqueda del tesoro que demostró la capacidad del robot para navegar y localizar objetivos basándose en información recibida. Todas estas implementacions funcionan de manera resistente, adaptandose al entorno simulado y gestionando errores comunes.
 
 ## Anexos
 
 ### A. Comandos de Ejecución
 
-```bash
-# Compilar workspace
-colcon build --symlink-install -package-select servicio_comandos busqueda_tesoro minimal_interfaces
-
-# Lanzar sistema completo para la tarea 1
-cd ~/Entregable-ARO
-./scripts/ejecutar_todo.sh
-
-# Ejecutar cliente de comandos
-ros2 run servicio_comandos cliente_comandos Patrullar
-
-# Lanzar sistema completo para la tarea 2
-cd ~/Entregable-ARO
-./scripts/ejecutar_todo2.sh
-```
+Revisar el README.md para instrucciones detalladas de instalación y ejecución.
