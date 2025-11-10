@@ -76,7 +76,9 @@ Nos aseguraremos de que el robot explore toda la casa siguiendo estas pautas:
 Una vez completada la exploración tenemos que guardar el mapa generado con `./scripts/paso5_mapa.sh`
 
 Esto genera dos archivos:
+
 - **casa_map.pgm:** Imagen del mapa en formato PGM (escala de grises)
+
 - **casa_map.yaml:** Metadatos del mapa con parámetros de configuración
 
 ### 3.3 Parámetros y mapa Final
@@ -196,7 +198,7 @@ La posicion de tesoro aproximada será la posición del robot más el vector de 
 
 Una vez se recibe informacion sobre el tesoro:
 
-1. **Cálculo de posición global:** Utiliza SLAM para localizar el robot en el mapa
+1. **Cálculo de posición global:** Utiliza un equivalente a AMCL para localizar el robot en el mapa
 2. **Navegación hacia el tesoro:** Envía un goal a Nav2 con la posición estimada del tesoro
 3. **Monitoreo continuo:** Nav2 navega autónomamente hacia el tesoro, evitando los obstáculos y planificando automáticamente la ruta.
 4. **Tesoro:** El tesoro se considera encontrado al estar a < 0.5m del mismo.
@@ -211,9 +213,9 @@ Una vez se recibe informacion sobre el tesoro:
 
 **Problema 2:** Robot no podia navegar por fuera de la casa
 
-- **Causa:** No habia suficientes caracteristicas en el mapa para que el SLAM funcionara bien
+- **Causa:** No habia suficientes caracteristicas en el mapa para que la navegación funcionara bien
 
-- **Solución:** Modificar los ajustes del SLAM para mejorar la localización con menos características en exteriores.
+- **Solución:** Modificar los ajustes de AMCL para mejorar la localización con menos características en exteriores.
 
 ![Detección del tesoro en RViz](imgs/img7.png)
 
