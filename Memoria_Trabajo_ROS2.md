@@ -157,7 +157,7 @@ def comando_callback(self, request, response):
 
 - **Causa:** No se gestionaba el ciclo continuo
 
-- **Solución:** Implementar flag `self.patrullando` y bucle infinito
+- **Solución:** Implementar un bucle que hace rondas de patrullaje
 
 **Problema 2:** Puntos de patrullaje y zonas complejas
 
