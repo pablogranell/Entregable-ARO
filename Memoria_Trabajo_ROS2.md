@@ -203,7 +203,7 @@ Una vez se recibe información sobre el tesoro:
 3. **Monitoreo continuo:** Nav2 navega autónomamente hacia el tesoro, evitando los obstáculos y planificando automáticamente la ruta.
 4. **Tesoro:** El tesoro se considera encontrado al estar a < 0.5m del mismo.
 
-### 5.6 Problemas Encontrados y Soluciones
+### 5.4 Problemas Encontrados y Soluciones
 
 **Problema 1:** Problemas si el tesoro estaba dentro de la casa
 
@@ -282,7 +282,7 @@ amcl:
   laser_max_range: 100.0       # Rango máximo láser considerado
 ```
 
-## 9. Conclusiones
+## 8. Conclusiones
 
 El proyecto ha cumplido satisfactoriamente todos los objetivos planteados.
 
